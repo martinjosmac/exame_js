@@ -405,12 +405,16 @@ form.addEventListener('submit', function (event) {
     targetElement.textContent = '';
 
     filteredData.forEach((movie) => {
-        const user = users.find((user) => user.id === movie.userId);
+        const user = users.find((user) => movie.userId === user.id);
 
         const cardElement = document.createElement('div');
 
-        const usernameElement = document.createElement('h2');
-        usernameElement.textContent = user.username;
+        const userIdElement = document.createElement('p');
+        userIdElement.textContent = `id: ${user.id}`
+        cardElement.appendChild(userIdElement);
+
+        const usernameElement = document.createElement('p');
+        usernameElement.textContent = `username: ${user.username}`;
         cardElement.appendChild(usernameElement);
 
         const emailElement = document.createElement('p');
