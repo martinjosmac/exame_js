@@ -359,13 +359,12 @@ const movies = [
 ]
 
 const form = document.getElementById('form');
-// const ulCard = document.getElementById('miList');
 const fromDate = document.getElementById('fromDate');
 const toDate = document.getElementById('toDate');
 const rate = document.getElementById('rate');
 const userId = document.getElementById('userId');
 
-// ------------------no usar funcion vieja-------------------------
+
 function filterMovies({ users, movies, userId, fromDate, toDate, rate }) {
     const fromDateValue = fromDate.value;
     const toDateValue = toDate.value;
@@ -395,7 +394,7 @@ form.addEventListener('submit', function (event) {
     const filteredData = filterMovies({ users, movies, userId, fromDate, toDate, rate });
 
     const targetElement = document.getElementById('miList');
-    targetElement.textContent = ''; // Limpiar el contenido existente
+    targetElement.textContent = ''; 
 
     filteredData.forEach((movie) => {
         const user = users.find((user) => user.id === movie.userId);
