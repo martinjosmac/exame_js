@@ -364,7 +364,7 @@ const toDate = document.getElementById('toDate');
 const rate = document.getElementById('rate');
 const userId = document.getElementById('userId');
 
-
+//funcion principal donde se filtra a traves del id, fecha y clasificacion
 function filterMovies({ users, movies, userId, fromDate, toDate, rate }) {
     const fromDateValue = fromDate.value;
     const toDateValue = toDate.value;
@@ -380,7 +380,7 @@ function filterMovies({ users, movies, userId, fromDate, toDate, rate }) {
         return (
             movieDateMilliseconds >= millisecondsFrom &&
             movieDateMilliseconds <= millisecondsTo &&
-            movie.rate >= Number(rate.value) || movie.userId === Number(userId.value)
+            movie.rate >= Number(rate.value) && movie.userId === Number(userId.value)
         );
     });
 
@@ -394,7 +394,7 @@ form.addEventListener('submit', function (event) {
     const filteredData = filterMovies({ users, movies, userId, fromDate, toDate, rate });
 
     const targetElement = document.getElementById('miList');
-    targetElement.textContent = ''; 
+    targetElement.textContent = '';
 
     filteredData.forEach((movie) => {
         const user = users.find((user) => user.id === movie.userId);
