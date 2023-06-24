@@ -376,12 +376,20 @@ function filterMovies({ users, movies, userId, fromDate, toDate, rate }) {
     const filteredMovies = movies.filter((movie) => {
         const movieDate = new Date(movie.watched);
         const movieDateMilliseconds = movieDate.getTime();
+        if (userId !== '') {
+            return (
+                movieDateMilliseconds >= millisecondsFrom &&
+                movieDateMilliseconds <= millisecondsTo &&
+                movie.rate >= Number(rate.value) && movie.userId === Number(userId.value)
+            );
+        } else {
+            return (
+                movieDateMilliseconds >= millisecondsFrom &&
+                movieDateMilliseconds <= millisecondsTo &&
+                movie.rate >= Number(rate.value) //&& movie.userId === Number(userId.value)
+            );
+        }
 
-        return (
-            movieDateMilliseconds >= millisecondsFrom &&
-            movieDateMilliseconds <= millisecondsTo &&
-            movie.rate >= Number(rate.value) && movie.userId === Number(userId.value)
-        );
     });
 
     return filteredMovies
@@ -424,6 +432,10 @@ form.addEventListener('submit', function (event) {
         const rateElement = document.createElement('p');
         rateElement.textContent = `Rate: ${movie.rate}`;
         cardElement.appendChild(rateElement);
+
+        const imageElement = document.createElement('img');
+        imageElement.src = movie.image;
+        cardElement.appendChild(imageElement);
 
         targetElement.appendChild(cardElement);
     });
